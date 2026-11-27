@@ -84,6 +84,7 @@ func (l *Listener) ListenTCP() (net.Listener, error) {
 	if followInterface != nil {
 		followInterface(tcpListener.(syscall.Conn))
 	}
+	tcpListener = newProxyProtoListener(tcpListener)
 	l.logger.Info("tcp server started at ", tcpListener.Addr())
 	l.tcpListener = tcpListener
 	return tcpListener, err
